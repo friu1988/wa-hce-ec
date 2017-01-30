@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Turnos"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TTurnoListForm">
+                <p:panel header="#{bundle.ListTTurnoTitle}">
+                    <p:dataTable id="datalist" value="#{tTurnoController.items}" var="item"
+                                 selectionMode="single" selection="#{tTurnoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.turSerial}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{item.turFecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Hora">
+                            <h:outputText value="#{item.turHora}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="HCU">
+                            <h:outputText value="#{item.hclSerial.hclNumeroHistoria}"/>
+                        </p:column>
+                        <p:column headerText="Médico">
+                            <h:outputText value="#{item.TMPerSerial}"/>
+                        </p:column>
+                        <p:column headerText="Admisionista">
+                            <h:outputText value="#{item.perSerial}"/>
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <p:selectBooleanCheckbox value="#{item.turEstado}" disabled="true"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tTurnoController.prepareCreate}" update=":TTurnoCreateForm" oncomplete="PF('TTurnoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TTurnoViewForm" oncomplete="PF('TTurnoViewDialog').show()" disabled="#{empty tTurnoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TTurnoEditForm" oncomplete="PF('TTurnoEditDialog').show()" disabled="#{empty tTurnoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tTurnoController.destroy}" update=":growl,datalist" disabled="#{empty tTurnoController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="dlg_crear_turnos.xhtml"/>
+            <ui:include src="dlg_editar_turnos.xhtml"/>
+            <ui:include src="dlg_ver_turnos.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

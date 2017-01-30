@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TTurnoEditDlg" widgetVar="TTurnoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTTurnoTitle}">
+            <h:form id="TTurnoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tTurnoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTTurnoLabel_turSerial}" for="turSerial" />
+                        <p:inputText id="turSerial" value="#{tTurnoController.selected.turSerial}" title="#{bundle.EditTTurnoTitle_turSerial}" required="true" requiredMessage="#{bundle.EditTTurnoRequiredMessage_turSerial}"/>
+                        <p:outputLabel value="#{bundle.EditTTurnoLabel_turFecha}" for="turFecha" />
+                        <p:calendar id="turFecha" pattern="MM/dd/yyyy" value="#{tTurnoController.selected.turFecha}" title="#{bundle.EditTTurnoTitle_turFecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTTurnoLabel_turHora}" for="turHora" />
+                        <p:calendar id="turHora" pattern="HH:mm:ss" value="#{tTurnoController.selected.turHora}" title="#{bundle.EditTTurnoTitle_turHora}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTTurnoLabel_turEstado}" for="turEstado" />
+                        <p:selectBooleanCheckbox id="turEstado" value="#{tTurnoController.selected.turEstado}" />
+                        <p:outputLabel value="#{bundle.EditTTurnoLabel_hclSerial}" for="hclSerial" />
+                        <p:selectOneMenu id="hclSerial" value="#{tTurnoController.selected.hclSerial}" required="true" requiredMessage="#{bundle.EditTTurnoRequiredMessage_hclSerial}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tHistoriaClinicaUnicaController.itemsAvailableSelectOne}"
+                                           var="hclSerialItem"
+                                           itemValue="#{hclSerialItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTTurnoLabel_TMPerSerial}" for="TMPerSerial" />
+                        <p:selectOneMenu id="TMPerSerial" value="#{tTurnoController.selected.TMPerSerial}" required="true" requiredMessage="#{bundle.EditTTurnoRequiredMessage_TMPerSerial}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tMedicoController.itemsAvailableSelectOne}"
+                                           var="TMPerSerialItem"
+                                           itemValue="#{TMPerSerialItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTTurnoLabel_perSerial}" for="perSerial" />
+                        <p:selectOneMenu id="perSerial" value="#{tTurnoController.selected.perSerial}" required="true" requiredMessage="#{bundle.EditTTurnoRequiredMessage_perSerial}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tAdmisionistaController.itemsAvailableSelectOne}"
+                                           var="perSerialItem"
+                                           itemValue="#{perSerialItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tTurnoController.update}" value="#{bundle.Save}" update="display,:TTurnoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TTurnoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TTurnoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">
+        Historia Clinica
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="frm_crear_hcu">
+            <p:panel>
+                <p:panelGrid style="width: 100%">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="8">
+                                <p:outputLabel value="HOSPITAL DEL DÍA"/>
+                            </p:column>
+                        </p:row>
+                    </f:facet>
+
+                    <p:row>
+                        <p:column rowspan="2">
+                            <p:outputLabel value="Institución del Sistema"/>
+                        </p:column>
+                        <p:column rowspan="2" colspan="2">
+                            <p:outputLabel value="Unidad Operativa"/>
+                        </p:column>
+                        <p:column  rowspan="2">
+                            <p:outputLabel value="Código OU"/>
+                        </p:column>
+                        <p:column colspan="3">
+                            <p:outputLabel value="Código Localización"/>
+                        </p:column>
+                        <p:column rowspan="2">
+                            <p:outputLabel value="Número de HISTORIA CLÍNICA"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Parroquia"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Cantón"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Provincia"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputText placeholder="UCE" style="width: 95%" disabled="true"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText placeholder="Archivo" style="width: 95%" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText placeholder="OU" style="width: 95%" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText placeholder="Belisario Quevedo" style="width: 95%" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText placeholder="Quito" style="width: 95%" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText placeholder="Pichincha" style="width: 95%" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel style="width: 95%" value="#{mBhistoriaClinica.numeroHCU}"/>
+                        </p:column>
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column rowspan="2" colspan="1">
+                            <p:outputLabel value="Tipo de Paciente"/>
+                        </p:column>
+                        <p:column rowspan="2"  colspan="1">
+                            <p:selectOneRadio style="width:95%" columns="1" layout="grid">
+                                <f:selectItem itemLabel="Particular" itemValue="PARTICULAR" />
+                                <f:selectItem   itemLabel="Estudiante" itemValue="ESTUDIANTE" />
+                                <f:ajax render="lbl_facultad lbl_carrera lbl_semestre" />
+                            </p:selectOneRadio>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Facultad"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Carrera"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Semestre"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">
+                            <!--<p:inputText id="lbl_facultad" style="width: 95%"/>-->
+                            <p:selectOneMenu>
+                                <f:selectItems value="#{mBhistoriaClinica.facultades}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:selectOneMenu>
+                                <f:selectItems value="#{mBhistoriaClinica.facultades}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText id="lbl_semestre" style="width: 95%"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="8">
+                            <p:outputLabel style="font-weight:bold">
+                                <font color="blue">1.- REGISTRO DE PRIMERA ADMISIÓN</font>
+                            </p:outputLabel>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Apellido Paterno"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Apellido Materno"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Primer Nombre"/>
+
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Segundo Nombre"/>                            
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Número de Cédula"/>  
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column  colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Dirección de Residencia Habitual"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Barrio"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="Parroquia"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Cantón"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Provicia"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Zona"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="N. Teléfono" />
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:inputTextarea style="width: 95%"/>    
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width:95%"/>    
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width:95%"/>    
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width:95%"/>    
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width:95%"/>    
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel=""/>
+                                <f:selectItem itemLabel="Urbano" itemValue="U"/>
+                                <f:selectItem itemLabel="Rural" itemValue="R"/> 
+                            </p:selectOneMenu> 
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width:95%"/>    
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Fecha de Nacimiento"/>
+                        </p:column>                        
+                        <p:column>
+                            <p:outputLabel value="Lugar de Nacimiento"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="Nacionalidad" title="País"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="Grupo Cultural"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="Edad" title="Años Cumplidos"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="Sexo" title="Género"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="Estado Civil"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="Instrucción" title="Último año de Educación APROBADO"/>
+                        </p:column>   
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:calendar/>
+                        </p:column>                        
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>   
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>   
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>   
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>   
+                        <p:column>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel=""/>
+                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="F"/> 
+                            </p:selectOneMenu>
+                        </p:column>   
+                        <p:column>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel=""/>
+                                <f:selectItem itemLabel="Soltero" itemValue="Sol"/>
+                                <f:selectItem itemLabel="Casado" itemValue="Cas"/>
+                                <f:selectItem itemLabel="Divorciado" itemValue="Div"/>
+                                <f:selectItem itemLabel="Viudo" itemValue="Viu"/>
+                                <f:selectItem itemLabel="Unión Libre" itemValue="U-L"/>
+                            </p:selectOneMenu>
+                        </p:column>   
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>   
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Fecha de Admisión"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Ocupación"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Empresa dónde trabaja"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Tipo de Seguro de Salud"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Referido de:"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="En caso necesario llamar a:"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Parentesco-Afinidad"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:outputLabel value="Dirección"/>
+                        </p:column>
+                        <p:column colspan="3">
+                            <p:outputLabel value="N° Teléfono"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                        <p:column colspan="3">
+                            <p:inputText style="width:95%"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <p:separator/>
+                <p:panelGrid  style="width: 100%">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column style="align-content: center">
+                                <p:commandButton value="Guardar"/>
+                            </p:column>
+                        </p:row>
+                    </f:facet>
+                </p:panelGrid>  
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

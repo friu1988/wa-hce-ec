@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TPersonalViewDlg" widgetVar="TPersonalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTPersonalTitle}">
+            <h:form id="TPersonalViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tPersonalController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perSerial}"/>
+                        <h:outputText value="#{tPersonalController.selected.perSerial}" title="#{bundle.ViewTPersonalTitle_perSerial}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perNombres}"/>
+                        <h:outputText value="#{tPersonalController.selected.perNombres}" title="#{bundle.ViewTPersonalTitle_perNombres}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perApellidos}"/>
+                        <h:outputText value="#{tPersonalController.selected.perApellidos}" title="#{bundle.ViewTPersonalTitle_perApellidos}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perFechaNacimiento}"/>
+                        <h:outputText value="#{tPersonalController.selected.perFechaNacimiento}" title="#{bundle.ViewTPersonalTitle_perFechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perCedula}"/>
+                        <h:outputText value="#{tPersonalController.selected.perCedula}" title="#{bundle.ViewTPersonalTitle_perCedula}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perDireccion}"/>
+                        <h:outputText value="#{tPersonalController.selected.perDireccion}" title="#{bundle.ViewTPersonalTitle_perDireccion}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perTelefono}"/>
+                        <h:outputText value="#{tPersonalController.selected.perTelefono}" title="#{bundle.ViewTPersonalTitle_perTelefono}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_perEmail}"/>
+                        <h:outputText value="#{tPersonalController.selected.perEmail}" title="#{bundle.ViewTPersonalTitle_perEmail}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_TMedico}"/>
+                        <h:outputText value="#{tPersonalController.selected.TMedico}" title="#{bundle.ViewTPersonalTitle_TMedico}"/>
+                        <h:outputText value="#{bundle.ViewTPersonalLabel_TAdmisionista}"/>
+                        <h:outputText value="#{tPersonalController.selected.TAdmisionista}" title="#{bundle.ViewTPersonalTitle_TAdmisionista}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TPersonalViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

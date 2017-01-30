@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTPersonalTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TPersonalListForm">
+                <p:panel header="#{bundle.ListTPersonalTitle}">
+                    <p:dataTable id="datalist" value="#{tPersonalController.items}" var="item"
+                                 selectionMode="single" selection="#{tPersonalController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.perSerial}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column headerText="Nombres">
+                            <h:outputText value="#{item.perNombres}"/>
+                        </p:column>
+                        <p:column headerText="Apellidos">
+                            <h:outputText value="#{item.perApellidos}"/>
+                        </p:column>
+                        <p:column headerText="Fecha de Nacimiento">
+                            <h:outputText value="#{item.perFechaNacimiento}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Cédula">
+                            <h:outputText value="#{item.perCedula}"/>
+                        </p:column>
+                        <p:column headerText="Dirección">
+                            <h:outputText value="#{item.perDireccion}"/>
+                        </p:column>
+                        <p:column headerText="Teléfono">
+                            <h:outputText value="#{item.perTelefono}"/>
+                        </p:column>
+                        <p:column headerText="Email">
+                            <h:outputText value="#{item.perEmail}"/>
+                        </p:column>
+                        <p:column headerText="Categoría">
+                            <h:outputText value="#{item.TMedico}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tPersonalController.prepareCreate}" update=":TPersonalCreateForm" oncomplete="PF('TPersonalCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TPersonalViewForm" oncomplete="PF('TPersonalViewDialog').show()" disabled="#{empty tPersonalController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TPersonalEditForm" oncomplete="PF('TPersonalEditDialog').show()" disabled="#{empty tPersonalController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tPersonalController.destroy}" update=":growl,datalist" disabled="#{empty tPersonalController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="dlg_crear_personal.xhtml"/>
+            <ui:include src="dlg_editar_personal.xhtml"/>
+            <ui:include src="dlg_ver_personal.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

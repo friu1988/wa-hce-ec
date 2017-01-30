@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTConsultorioTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TConsultorioListForm">
+                <p:panel header="#{bundle.ListTConsultorioTitle}">
+                    <p:dataTable id="datalist" value="#{tConsultorioController.items}" var="item"
+                                 selectionMode="single" selection="#{tConsultorioController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.coSerial}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTConsultorioTitle_coSerial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.coSerial}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTConsultorioTitle_coUbicacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.coUbicacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTConsultorioTitle_coNumero}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.coNumero}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tConsultorioController.prepareCreate}" update=":TConsultorioCreateForm" oncomplete="PF('TConsultorioCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TConsultorioViewForm" oncomplete="PF('TConsultorioViewDialog').show()" disabled="#{empty tConsultorioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TConsultorioEditForm" oncomplete="PF('TConsultorioEditDialog').show()" disabled="#{empty tConsultorioController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tConsultorioController.destroy}" update=":growl,datalist" disabled="#{empty tConsultorioController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="dlg_crear_consultorio.xhtml"/>
+            <ui:include src="dlg_editar_consultorio.xhtml"/>
+            <ui:include src="dlg_ver_consultorio.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

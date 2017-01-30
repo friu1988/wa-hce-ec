@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TConsultorioEditDlg" widgetVar="TConsultorioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTConsultorioTitle}">
+            <h:form id="TConsultorioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tConsultorioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTConsultorioLabel_coSerial}" for="coSerial" />
+                        <p:inputText id="coSerial" value="#{tConsultorioController.selected.coSerial}" title="#{bundle.EditTConsultorioTitle_coSerial}" required="true" requiredMessage="#{bundle.EditTConsultorioRequiredMessage_coSerial}"/>
+                        <p:outputLabel value="#{bundle.EditTConsultorioLabel_coUbicacion}" for="coUbicacion" />
+                        <p:inputText id="coUbicacion" value="#{tConsultorioController.selected.coUbicacion}" title="#{bundle.EditTConsultorioTitle_coUbicacion}" />
+                        <p:outputLabel value="#{bundle.EditTConsultorioLabel_coNumero}" for="coNumero" />
+                        <p:inputText id="coNumero" value="#{tConsultorioController.selected.coNumero}" title="#{bundle.EditTConsultorioTitle_coNumero}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tConsultorioController.update}" value="#{bundle.Save}" update="display,:TConsultorioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TConsultorioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TConsultorioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
