@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "TFacultad.findAll", query = "SELECT t FROM TFacultad t"),
     @NamedQuery(name = "TFacultad.findByFacSerial", query = "SELECT t FROM TFacultad t WHERE t.facSerial = :facSerial"),
+    @NamedQuery(name = "TFacultad.findByPadreFacSerial", query = "SELECT t FROM TFacultad t WHERE t.tFFacSerial = :padreFacSerial"),
     @NamedQuery(name = "TFacultad.findByFacNombre", query = "SELECT t FROM TFacultad t WHERE t.facNombre = :facNombre"),
     @NamedQuery(name = "TFacultad.findByFacUbicacion", query = "SELECT t FROM TFacultad t WHERE t.facUbicacion = :facUbicacion")})
 public class TFacultad implements Serializable {
@@ -122,21 +123,22 @@ public class TFacultad implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TFacultad)) {
+    public boolean equals(Object obj) {
+        if (obj instanceof TFacultad) {
+            TFacultad facultad = (TFacultad) obj;
+            if (facultad.getFacSerial().equals(this.facSerial)) {
+            } else {
+                return true;
+            }
+        } else {
             return false;
         }
-        TFacultad other = (TFacultad) object;
-        if ((this.facSerial == null && other.facSerial != null) || (this.facSerial != null && !this.facSerial.equals(other.facSerial))) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
     }
 
     @Override
     public String toString() {
-        return "com.capa.datos.TFacultad[ facSerial=" + facSerial + " ]";
+        return facNombre;
     }
-    
+
 }

@@ -99,12 +99,14 @@
                         <p:column colspan="2">
                             <!--<p:inputText id="lbl_facultad" style="width: 95%"/>-->
                             <p:selectOneMenu>
-                                <f:selectItems value="#{mBhistoriaClinica.facultades}"/>
+                                <f:selectItem  itemLabel="FACULTAD"/>
+                                <f:selectItems value="#{mBhistoriaClinica.facultades}" var="fac" itemLabel="#{fac.facNombre}" itemValue="#{fac.facSerial}"/>
                             </p:selectOneMenu>
                         </p:column>
                         <p:column colspan="2">
                             <p:selectOneMenu>
-                                <f:selectItems value="#{mBhistoriaClinica.facultades}"/>
+                                <f:selectItem  itemLabel="CARRERA"/>
+                                <f:selectItems value="#{mBhistoriaClinica.carreras}"/>
                             </p:selectOneMenu>
                         </p:column>
                         <p:column colspan="2">

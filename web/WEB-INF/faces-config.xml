@@ -8,5 +8,15 @@
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+        <navigation-rule>     
+            <navigation-case>
+                <from-outcome>login</from-outcome>
+                <to-view-id>/login.jsf</to-view-id>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>welcome</from-outcome>
+                <to-view-id>/bienvenida.jsf</to-view-id>
+            </navigation-case>
+        </navigation-rule>
     </application>
 </faces-config>

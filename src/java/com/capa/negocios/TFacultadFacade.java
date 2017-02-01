@@ -6,9 +6,12 @@
 package com.capa.negocios;
 
 import com.capa.datos.TFacultad;
+import com.capa.datos.TUsuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,13 @@ public class TFacultadFacade extends AbstractFacade<TFacultad> {
     public TFacultadFacade() {
         super(TFacultad.class);
     }
-    
+
+    public List<TFacultad> buscarCarreras(TFacultad facultad) {
+        Query sql = em.createNamedQuery("TFacultad.findByPadreFacSerial");
+        sql.setParameter("padreFacSerial", facultad);
+        List<TFacultad> carreras = sql.getResultList();
+        System.out.println(carreras.size());
+        return carreras;
+    }
+
 }

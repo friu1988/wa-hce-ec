@@ -27,7 +27,6 @@ public class MBControlAcceso implements Serializable {
 
     private TUsuario usuario;
     private TUsuario us;
-
     private MenuModel menu;
 
     private List<TMenu> menus;
@@ -37,7 +36,6 @@ public class MBControlAcceso implements Serializable {
 
     @PostConstruct
     private void init() {
-
         menu = new DefaultMenuModel();
         accederMenus();
     }
@@ -111,7 +109,7 @@ public class MBControlAcceso implements Serializable {
         try {
             TUsuario userL = (TUsuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userLogin");
             if (userL == null) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("./login.jsf");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.jsf");
             }
         } catch (Exception e) {
             System.out.println("Error CONTROL DE ACCESO >>>>>>>" + e.getMessage());

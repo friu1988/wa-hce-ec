@@ -34,6 +34,7 @@ public class MBhistoriaClinica implements Serializable {
     private TKardex kardex;
 
     private List<TFacultad> facultades;
+    private List<TFacultad> carreras;
 
     private String numeroHCU;
     @EJB
@@ -148,15 +149,51 @@ public class MBhistoriaClinica implements Serializable {
         this.numeroHCU = numeroHCU;
     }
 
+    public void click() {
+//        filtrarFacultades();
+        TFacultad facultad = new TFacultad();
+        facultad.setFacSerial("fce");
+        filtrarCarreras(facultad);
+    }
+
+    public List<TFacultad> filtrarFacultades() {
+        List<TFacultad> temporal = new LinkedList<>();
+        for (TFacultad facultad : servicioFacultad.findAll()) {
+            if (facultad.getTFFacSerial() == null) {
+                temporal.add(facultad);
+            }
+        }
+        return temporal;
+    }
+
+    public List<TFacultad> filtrarCarreras(TFacultad facultad) {
+        List<TFacultad> temporal = new LinkedList<>();
+        for (TFacultad carrera : servicioFacultad.buscarCarreras(facultad)) {
+            System.out.println(carrera);
+        }
+        return temporal;
+    }
+
     public List<TFacultad> getFacultades() {
         if (facultades == null) {
-            facultades = servicioFacultad.findAll();
+            facultades = filtrarFacultades();
         }
         return facultades;
     }
 
     public void setFacultades(List<TFacultad> facultades) {
         this.facultades = facultades;
+    }
+
+    public List<TFacultad> getCarreras() {
+        if (carreras == null) {
+            carreras = new LinkedList<>();
+        }
+        return carreras;
+    }
+
+    public void setCarreras(List<TFacultad> carreras) {
+        this.carreras = carreras;
     }
 
 }
